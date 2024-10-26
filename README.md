@@ -45,4 +45,4 @@ pages/api ディレクトリは /api/* にマッピングされています。�
 
 ・[`作って学ぶ Next.js 13！マークダウンブログを作ってみよう | App Router対応`](https://musclecoding.com/nextjs-app-router-markdown-blog/#nextjs%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97)
 
-・[`Vercelにデプロイしてみよう@](https://typescriptbook.jp/tutorials/vercel-deploy)
+・[`Vercelにデプロイしてみよう`](https://typescriptbook.jp/tutorials/vercel-deploy)
