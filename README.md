@@ -4,17 +4,39 @@
 
 ## はじめに
 
-このプロジェクトは、[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) を使用してブートストラップされました。
+このプロジェクトは、[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) を使用しました。
 
-### 開発サーバーの起動
 
-まず、開発サーバーを実行します。
+### 実装した機能一覧
+構成
+・各記事タイトルをクリックすると、記事の詳細ページに遷移する。
+・Markdownファイルを読み込み、記事のタイトル、本文の初め100文字、サムネイルの3つを全ての記事について表示。
+・記事詳細ページでは、サムネイル、タイトル、本文、投稿日が最低でも表示されている
+デザイン
+・ヘッダーとフッターがある。(ヘッダーの左上にブログ名があり、そこを押すと/に戻る)
+・CSSフレームワークが何か導入されている＝＞tailwind
+環境設定
+・TypeScriptで書かれている
+・フォーマッターが導入されている＝＞Pretter
+・Vercelにデプロイ
+・実行までのコマンドがreadmeに分かりやすく書かれている。
+追加課題(腕試し課題)→オフィスの本1冊プレゼント
+・記事にタグ付け＋記事検索
+・記事へのコメント入力フォーム＋記事へのコメントをmarkdownに書き込み＋記事へのコメントを表示
+
+
+#### 開発サーバーの起動
+
+まず、以下のコードをターミナルに入力し開発サーバーを実行します。
 
 ```bash
 npm run dev
-# または
-yarn dev
 
+ブラウザで http://localhost:3000 を開いて、結果を確認してください。
+
+##### ページの編集
+```bash
+page/index.jsを修正することでページ（ホーム画面）の編集を開始できます。
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
