@@ -29,8 +29,7 @@
 
 まず、以下のコードをターミナルに入力し開発サーバーを実行します。
 
-```bash
-npm run dev```bash
+`npm run dev`
 
 ブラウザで http://localhost:3000 を開いて、結果を確認してください。
 
