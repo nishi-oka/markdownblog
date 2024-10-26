@@ -31,14 +31,13 @@
 
 `npm run dev`
 
-ブラウザで http://localhost:3000 を開いて、結果を確認してください。
+ブラウザで [localhost/3000](http://localhost:300) を開いて、結果を確認してください。
 
 ### ページの編集
-```bash
-page/index.jsを修正することでページ（ホーム画面）の編集を開始できます。
+`page/index.js`を修正することでページ（ホーム画面）の編集を開始できます。
 
 ### APIルート
-API ルート は、http://localhost:3000/api/hello でアクセスできます。このエンドポイントは ```bash pages/api/hello.js で編集できます。
+API ルート は、http://localhost:3000/api/comments でアクセスできます。このエンドポイントは `pages/api/comments.js` で編集できます。
 pages/api ディレクトリは /api/* にマッピングされています。このディレクトリ内のファイルは、React ページではなく、API ルート として扱われます。
 
 ### 参考にしたサイト
