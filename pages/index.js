@@ -1,6 +1,6 @@
 import fs from 'fs';
 import matter from 'gray-matter';
-import PostCard from '../components/postcard';
+import PostCard from '../components/PostCard';
 import { useState } from 'react';
 
 export const getStaticProps = () => {
