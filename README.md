@@ -1,3 +1,21 @@
+# プロジェクト名
+
+このプロジェクトは、[Next.js](https://nextjs.org/)を使用して作成されたブログアプリです。
+
+## はじめに
+
+このプロジェクトは、[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) を使用してブートストラップされました。
+
+### 開発サーバーの起動
+
+まず、開発サーバーを実行します。
+
+```bash
+npm run dev
+# または
+yarn dev
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
