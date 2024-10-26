@@ -50,7 +50,7 @@
 API ルート は、[`api/comments`](http://localhost:3000/api/comments) でアクセスできます。このエンドポイントは `pages/api/comments.js` で編集できます。
 pages/api ディレクトリは /api/* にマッピングされています。このディレクトリ内のファイルは、React ページではなく、API ルート として扱われます。
 
-### 参考にしたサイト
+## 参考にしたサイト
 ・[`Next.jsを利用した初めての本格的Markdownブログサイトの構築`](https://reffect.co.jp/react/nextjs-markdown-blog#md)
 
 ・[`作って学ぶ Next.js 13！マークダウンブログを作ってみよう | App Router対応`](https://musclecoding.com/nextjs-app-router-markdown-blog/#nextjs%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97)
