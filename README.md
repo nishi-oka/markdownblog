@@ -37,7 +37,7 @@
 `page/index.js`を修正することでページ（ホーム画面）の編集を開始できます。
 
 ### APIルート
-API ルート は、http://localhost:3000/api/comments でアクセスできます。このエンドポイントは `pages/api/comments.js` で編集できます。
+API ルート は、[`api/comments`](http://localhost:3000/api/comments) でアクセスできます。このエンドポイントは `pages/api/comments.js` で編集できます。
 pages/api ディレクトリは /api/* にマッピングされています。このディレクトリ内のファイルは、React ページではなく、API ルート として扱われます。
 
 ### 参考にしたサイト
