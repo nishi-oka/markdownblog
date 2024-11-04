@@ -43,10 +43,6 @@ const Post = ({ frontMatter, content }) => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (!frontMatter.slug) {
-      alert('スラッグが無効です。');
-      return;
-    }
 
     // 名前とコメントの文字数制限
     const maxNameLength = 30;
@@ -59,6 +55,10 @@ const Post = ({ frontMatter, content }) => {
 
     if (comment.length > maxCommentLength) {
       alert(`コメントは${maxCommentLength}文字以内で入力してください。`);
+      return;
+    }
+    if (!frontMatter.slug) {
+      alert('スラッグが無効です。');
       return;
     }
     const newComment = { name, content: comment };
