@@ -2,8 +2,6 @@ import fs from 'fs';
 import path from 'path';
 
 export default function handler(req, res) {
-  const { slug } = req.body; // slugをreq.bodyから取得
-
   // GETメソッドの処理
   if (req.method === 'GET') {
     const { slug } = req.query; // slugを取得
@@ -38,15 +36,16 @@ export default function handler(req, res) {
         .status(400)
         .json({ message: '名前は20文字以内で入力してください。' });
     }
-
     if (!content || content.trim() === '') {
       return res.status(400).json({ message: 'コメント内容は必須です。' });
     }
-
     if (content.length > 300) {
       return res
         .status(400)
         .json({ message: 'コメントは300文字以内で入力してください。' });
+    }
+    if (!slug) {
+      return res.status(400).json({ message: 'スラッグが必要です。' });
     }
 
     // コメントをファイルに保存するためのパスを設定
@@ -55,25 +54,43 @@ export default function handler(req, res) {
       'comments',
       `${slug}.json`
     );
+    console.log('Submitting comment with slug:', slug);
 
-    // 既存のコメントを読み込み、更新
+    // 既存のコメントを読み込み
     let comments = [];
     if (fs.existsSync(commentsFilePath)) {
       const fileContents = fs.readFileSync(commentsFilePath, 'utf-8');
       comments = JSON.parse(fileContents);
     }
 
+    // 重複チェック
+    const isDuplicate = comments.some(
+      (c) => c.name === name && c.content === content
+    );
+    if (isDuplicate) {
+      return res
+        .status(400)
+        .json({ message: '同じコメントは既に存在します。' });
+    }
+
     // 新しいコメントを追加
     comments.push({ name, content });
 
     // コメントをJSONファイルに書き込む
-    fs.writeFileSync(commentsFilePath, JSON.stringify(comments, null, 2));
-
-    // 成功レスポンスを返す
-    res.status(200).json({ message: 'コメントが正常に追加されました！' });
+    try {
+      fs.writeFileSync(commentsFilePath, JSON.stringify(comments, null, 2));
+      // 成功レスポンスを返す
+      return res
+        .status(200)
+        .json({ message: 'コメントが正常に追加されました！' });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: 'コメントの保存に失敗しました。' });
+    }
   } else {
     // 他のメソッドには405を返す
     res.setHeader('Allow', ['GET', 'POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

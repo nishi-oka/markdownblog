@@ -43,6 +43,10 @@ const Post = ({ frontMatter, content }) => {
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
+    if (!frontMatter.slug) {
+      alert('スラグが無効です。');
+      return;
+    }
     const newComment = { name, content: comment };
     const res = await fetch('/api/comments', {
       method: 'POST',

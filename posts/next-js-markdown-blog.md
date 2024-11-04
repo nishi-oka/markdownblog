@@ -1,4 +1,5 @@
 ---
+slug: 'nextjs-markdown-blog'
 title: 'Next.jsでmarkdownブログを構築'
 date: '2024-10-26'
 description: 'This is my first blog post!'
