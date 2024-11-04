@@ -44,7 +44,21 @@ const Post = ({ frontMatter, content }) => {
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (!frontMatter.slug) {
-      alert('スラグが無効です。');
+      alert('スラッグが無効です。');
+      return;
+    }
+
+    // 名前とコメントの文字数制限
+    const maxNameLength = 30;
+    const maxCommentLength = 200;
+
+    if (name.length > maxNameLength) {
+      alert(`名前は${maxNameLength}文字以内で入力してください。`);
+      return;
+    }
+
+    if (comment.length > maxCommentLength) {
+      alert(`コメントは${maxCommentLength}文字以内で入力してください。`);
       return;
     }
     const newComment = { name, content: comment };
