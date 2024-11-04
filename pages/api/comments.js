@@ -84,6 +84,7 @@ export default function handler(req, res) {
         .status(200)
         .json({ message: 'コメントが正常に追加されました！' });
     } catch (error) {
+      console.error('Error writing comments to file:', error); // エラー詳細をログに出力
       return res
         .status(500)
         .json({ message: 'コメントの保存に失敗しました。' });

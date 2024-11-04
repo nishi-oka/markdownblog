@@ -107,6 +107,8 @@ const Post = ({ frontMatter, content }) => {
           type="text"
           placeholder="名前"
           value={name}
+          maxLength="20"
+          style={{ width: '300px' }}
           onChange={(e) => setName(e.target.value)}
           required
           className="mb-2 px-2 py-1 border rounded"
