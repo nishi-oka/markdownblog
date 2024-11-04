@@ -2,6 +2,7 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 export async function getStaticProps({ params }) {
   const file = fs.readFileSync(`posts/${params.slug}.md`, 'utf-8');
@@ -28,6 +29,17 @@ const Post = ({ frontMatter, content }) => {
   const [comments, setComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const commentsPerPage = 5; // 1ページあたりのコメント数
+  useEffect(() => {
+    const fetchComments = async () => {
+      const res = await fetch(`/api/comments?slug=${frontMatter.slug}`);
+      const data = await res.json();
+      if (res.ok) {
+        setComments(data.comments); // 取得したコメントをセット
+      }
+    };
+
+    fetchComments();
+  }, [frontMatter.slug]); // slugが変わるたびに再実行
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -52,14 +64,21 @@ const Post = ({ frontMatter, content }) => {
   // ページネーション用のコメントの取得
   const indexOfLastComment = currentPage * commentsPerPage;
   const indexOfFirstComment = indexOfLastComment - commentsPerPage;
-  const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
+  const currentComments = comments.slice(
+    indexOfFirstComment,
+    indexOfLastComment
+  );
 
   // ページ数の変更
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="post-container">
-      <img src={`/${frontMatter.image}`} alt={frontMatter.title} className="thumbnail" />
+      <img
+        src={`/${frontMatter.image}`}
+        alt={frontMatter.title}
+        className="thumbnail"
+      />
       <h1 className="my-8 font-bold text-2xl">{frontMatter.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
       <p className="my-8">{frontMatter.date}</p>
@@ -81,7 +100,10 @@ const Post = ({ frontMatter, content }) => {
           required
           className="mb-2 px-2 py-1 border rounded w-full"
         />
-        <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
+        <button
+          type="submit"
+          className="px-4 py-2 bg-blue-500 text-white rounded"
+        >
           送信
         </button>
       </form>
@@ -98,15 +120,18 @@ const Post = ({ frontMatter, content }) => {
 
       {/* ページネーションボタン */}
       <div className="pagination">
-        {Array.from({ length: Math.ceil(comments.length / commentsPerPage) }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => paginate(index + 1)}
-            className={`px-2 py-1 m-1 ${currentPage === index + 1 ? 'bg-gray-300' : 'bg-gray-100'}`}
-          >
-            {index + 1}
-          </button>
-        ))}
+        {Array.from(
+          { length: Math.ceil(comments.length / commentsPerPage) },
+          (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => paginate(index + 1)}
+              className={`px-2 py-1 m-1 ${currentPage === index + 1 ? 'bg-gray-300' : 'bg-gray-100'}`}
+            >
+              {index + 1}
+            </button>
+          )
+        )}
       </div>
     </div>
   );
