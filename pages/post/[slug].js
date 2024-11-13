@@ -28,7 +28,12 @@ const Post = ({ frontMatter, content }) => {
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const commentsPerPage = 5; // 1ページあたりのコメント数
+  const commentsPerPage = 10; // 1ページあたりのコメント数
+
+// 名前とコメントの文字数制限
+const maxNameLength = 20;
+const maxCommentLength = 200;
+
   useEffect(() => {
     const fetchComments = async () => {
       const res = await fetch(`/api/comments?slug=${frontMatter.slug}`);
@@ -44,9 +49,7 @@ const Post = ({ frontMatter, content }) => {
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
 
-    // 名前とコメントの文字数制限
-    const maxNameLength = 30;
-    const maxCommentLength = 200;
+
 
     if (name.length > maxNameLength) {
       alert(`名前は${maxNameLength}文字以内で入力してください。`);
@@ -101,7 +104,11 @@ const Post = ({ frontMatter, content }) => {
       <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
       <p className="my-8">{frontMatter.date}</p>
 
-      <h2 className="my-4">コメントを残す</h2>
+      <h2 className="my-4 mb-1">コメントを残す</h2>
+      <p className="text-sm text-gray-500 mb-2">
+        　※名前は{maxNameLength}文字以内で入力してください。<br />
+        　※コメントは{maxCommentLength}文字以内で入力してください。
+</p>
       <form onSubmit={handleCommentSubmit} className="comment-form">
         <input
           type="text"
@@ -132,8 +139,8 @@ const Post = ({ frontMatter, content }) => {
       <div>
         {currentComments.map((c, index) => (
           <div key={index} className="comment">
-            <strong>{c.name}</strong>
-            <p>{c.content}</p>
+            <strong>投稿名：{c.name}</strong>
+            <p className="mb-2">{c.content}</p>
           </div>
         ))}
       </div>
