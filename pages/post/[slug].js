@@ -39,7 +39,7 @@ const maxCommentLength = 200;
       const res = await fetch(`/api/comments?slug=${frontMatter.slug}`);
       const data = await res.json();
       if (res.ok) {
-        setComments(data.comments); // 取得したコメントをセット
+        setComments(data.comments.reverse()); // 取得したコメントを逆順でセット
       }
     };
 
@@ -73,7 +73,7 @@ const maxCommentLength = 200;
 
     const data = await res.json();
     if (res.ok) {
-      setComments([...comments, newComment]);
+      setComments([newComment, ...comments]);
       setName('');
       setComment('');
       alert('コメントが追加されました');
